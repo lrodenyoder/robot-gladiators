@@ -7,11 +7,6 @@ var enemyNames = ["Roberto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
-console.log(enemyNames);
-console.log(enemyNames.length);
-console.log(enemyNames[0]);
-console.log(enemyNames[3]);
-
 //fight function (with parameter for enemy name)
 var fight = function (enemyName) {
     while (playerHealth > 0 && enemyHealth > 0) {
@@ -93,6 +88,7 @@ var startGame = function () {
             }
         } /*if player is dead, stop program*/else {
             window.alert("You have lost your robot in battle. Game over!");
+            break;
         }
     }
 
@@ -101,6 +97,8 @@ var startGame = function () {
 };
 
 var endGame = function () {
+    window.alert("The game has now ended. Let's see how you did!");
+    
     if (playerHealth > 0) {
         window.alert("Great job, you've survived the game. You now have a score of " + playerMoney + ".");
     } else {
