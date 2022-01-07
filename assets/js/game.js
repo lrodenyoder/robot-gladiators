@@ -22,14 +22,16 @@ var fight = function (enemyName) {
             if (confirmSkip) {
                 window.alert(playerName + " has decided to skip this fight. Goodbye!");
                 //subtract money from playerMoney for skipping
-                playerMoney = playerMoney - 10;
+                playerMoney = Math.max(0, playerMoney - 10);
                 console.log("playerMoney", playerMoney);
                 break;
             }
         }
 
         //subtract value of playerAttack from value of enemyHealth and use that result to update enemyHealth var
-        enemyHealth = enemyHealth - playerAttack;
+        var damage = randomNumber(playerAttack - 3, playerAttack);
+        enemyHealth = Math.max(0, enemyHealth - damage);
+
         console.log(
             playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
         );
@@ -45,7 +47,7 @@ var fight = function (enemyName) {
         }
 
         //subtract value of enemyAttack from playerHealth and use that result to update playerHealth var
-        playerHealth = playerHealth - enemyAttack;
+        playerHealth = Math.max(0, playerHealth - enemyAttack);
         console.log(
             enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
         );
@@ -75,7 +77,7 @@ var startGame = function () {
             //pick new enemy based of the index of the enemyNames array
             var pickedEnemyName = enemyNames[i];
             //reset enemyHealth before new fight
-            enemyHealth = 50;
+            enemyHealth = randomNumber(40, 60);
             //pass the pickedEnemyName variable's value into the fight function, where it will assume the enemyName parameter
             fight(pickedEnemyName);
             //if player is still alive and we're not at the last enemy in the array
@@ -98,7 +100,7 @@ var startGame = function () {
 
 var endGame = function () {
     window.alert("The game has now ended. Let's see how you did!");
-    
+
     if (playerHealth > 0) {
         window.alert("Great job, you've survived the game. You now have a score of " + playerMoney + ".");
     } else {
@@ -149,6 +151,12 @@ var shop = function () {
             break;
     }
 };
+
+var randomNumber = function (min, max) {
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+    return value;
+}
 
 
 startGame();
