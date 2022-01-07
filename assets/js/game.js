@@ -1,3 +1,12 @@
+//BEGIN GAME FUNCTIONS
+
+//function to create random numeric value
+var randomNumber = function (min, max) {
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+    return value;
+};
+
 //fight function (with parameter for enemy name)
 var fight = function (enemy) {
     while (playerInfo.health > 0 && enemy.health > 0) {
@@ -14,15 +23,16 @@ var fight = function (enemy) {
                 window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
                 //subtract money from playerMoney for skipping
                 playerInfo.money = Math.max(0, playerInfo.money - 10);
-                console.log("playerMoney", playerInfo.money);
+                console.log("playerInfo.money", playerInfo.money);
                 break;
             }
         }
 
         //subtract value of playerAttack from value of enemyHealth and use that result to update enemyHealth var
         var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
-        enemy.health = Math.max(0, enemy.health - damage);
 
+        enemy.health = Math.max(0, enemy.health - damage);
+        
         console.log(
             playerInfo.name + " attacked " + enemy.name + ". " + enemy.name + " now has " + enemy.health + " health remaining."
         );
@@ -38,7 +48,10 @@ var fight = function (enemy) {
         }
 
         //subtract value of enemyAttack from playerHealth and use that result to update playerHealth var
+        var damage = randomNumber(enemy.attack - 3, enemy.attack);
+
         playerInfo.health = Math.max(0, playerInfo.health - enemy.attack);
+        
         console.log(
             enemy.name + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining."
         );
@@ -128,12 +141,9 @@ var shop = function () {
             break;
     }
 };
+//END GAME FUNCTIONS
 
-var randomNumber = function (min, max) {
-    var value = Math.floor(Math.random() * (max - min + 1) + min);
-
-    return value;
-};
+//BEGIN GAME INFORMATION/VARIABLES
 
 var playerInfo = {
     name: window.prompt("What is your robot's name?"),
@@ -179,7 +189,7 @@ var enemyInfo = [
         attack: randomNumber(10, 14)
     }
 ];
+//END GAME INFORMATION/VARIABLES
 
-
-
+//RUN GAME
 startGame();
