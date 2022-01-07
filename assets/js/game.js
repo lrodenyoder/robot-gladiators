@@ -142,6 +142,23 @@ var startGame = function () {
 var endGame = function () {
     window.alert("The game has now ended. Let's see how you did!");
 
+    //check localStorage for high score
+    var highScore = localStorage.getItem("highScore");
+    
+    if (highScore === null) {
+        highScore = 0;
+    }
+
+    //if player has more money than current high score, player has new high highScore
+    if (playerInfo.money > highScore) {
+        localStorage.setItem("highscore", playerInfo.money);
+        localStorage.setItem("name", playerInfo.name);
+
+        alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
+    } else {
+        alert(playerInfo.name + " did not beat the high score of " + highScore + ". Maybe next time!");
+    }
+
     if (playerInfo.health > 0) {
         window.alert("Great job, you've survived the game. You now have a score of " + playerInfo.money + ".");
     } else {
